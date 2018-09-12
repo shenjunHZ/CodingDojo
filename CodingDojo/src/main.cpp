@@ -39,24 +39,33 @@
 
 #include <iostream>
 
+constexpr int TOTAL_RUN_TIMES = 5;
+
 int main(int argc, char* argv[])
 {
     using namespace game;
     ControlCell controlCell;
-    controlCell.initialCell(4, 8); // 4*8 grid
-    controlCell.setCellLive(4, 1);
-    controlCell.setCellLive(3, 2);
-    controlCell.setCellLive(4, 2);
+//     controlCell.initialCell(4, 8); // 4*8 grid
+//     controlCell.setCellLive(4, 1);
+//     controlCell.setCellLive(3, 2);
+//     controlCell.setCellLive(4, 2);
+    //“滑翔者”：每4个回合“它”会向右下角走一格。虽然细胞早就是不同的细胞了，但它能保持原本的形态。
+     controlCell.initialCell(10, 10);
+     controlCell.setCellLive(4, 1);
+     controlCell.setCellLive(4, 2);
+     controlCell.setCellLive(4, 3);
+     controlCell.setCellLive(4, 2);
+     controlCell.setCellLive(3, 3);
+     controlCell.setCellLive(2, 2);
 
-    controlCell.printCellStatus();
-    controlCell.nextGeneration();
-    controlCell.updateToNextGeneration();
-    std::cout << "== == == == == == == == == == == == == == == == == == == == == =" << std::endl;
-    controlCell.printCellStatus();
-    controlCell.nextGeneration();
-    controlCell.updateToNextGeneration();
-    std::cout << "== == == == == == == == == == == == == == == == == == == == == =" << std::endl;
-    controlCell.printCellStatus();
+     controlCell.printCellStatus();
+     for (int times = 0; times < TOTAL_RUN_TIMES; times++)
+     { 
+         controlCell.nextGeneration();
+         controlCell.updateToNextGeneration();
+         std::cout << "== == == == == == == == == == == == == == == == == == == == == =" << std::endl;
+         controlCell.printCellStatus();
+     }
 
     system("pause");
     return 0;
